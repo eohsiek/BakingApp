@@ -2,8 +2,10 @@ package com.example.android.bakingapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
+import com.example.android.bakingapp.Data.Recipe;
 import com.example.android.bakingapp.Network.GetRecipeAsync;
 
 public class MainActivity extends AppCompatActivity  implements
@@ -22,7 +24,8 @@ public class MainActivity extends AppCompatActivity  implements
 
 
     @Override
-    public void onTaskCompleted(String response) {
-        textView.setText(response);
+    public void onTaskCompleted(Recipe[] response) {
+        String recipeid = response[0].getName();
+        textView.setText(recipeid);
     }
 }

@@ -1,15 +1,16 @@
 package com.example.android.bakingapp.Network;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
+import com.example.android.bakingapp.Data.Recipe;
 import com.example.android.bakingapp.MainActivity;
+import com.google.gson.Gson;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class GetRecipeAsync extends AsyncTask<String, String, String> {
+public class GetRecipeAsync extends AsyncTask<String, String, Recipe[]> {
 
     String s = "This is a test";
     final OkHttpClient client = new OkHttpClient();
@@ -23,14 +24,16 @@ public class GetRecipeAsync extends AsyncTask<String, String, String> {
     }
 
     @Override
-    protected String doInBackground(String... params) {
+    protected Recipe[] doInBackground(String... params) {
         try {
             Response response = client.newCall(request).execute();
             if (!response.isSuccessful()) {
                 return null;
             }
             String responsestring = response.body().string();
-            return responsestring;
+            Gson gson = new Gson();
+            Recipe[] recipeArray = gson.fromJson(responsestring, Recipe[].class);
+            return recipeArray;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -38,13 +41,13 @@ public class GetRecipeAsync extends AsyncTask<String, String, String> {
     }
 
     @Override
-    protected void onPostExecute(String result) {
+    protected void onPostExecute(Recipe[] result) {
 
         taskCompleted.onTaskCompleted(result);
     }
 
     public interface OnTaskCompleted {
-        void onTaskCompleted(String response);
+        void onTaskCompleted(Recipe[] response);
     }
 }
 
