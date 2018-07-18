@@ -14,6 +14,9 @@ public class Recipe
 
     private Steps[] steps;
 
+    public Recipe() {
+    }
+
     public Ingredients[] getIngredients ()
     {
         return ingredients;

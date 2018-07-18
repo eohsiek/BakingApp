@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="recipe" type="com.example.android.bakingapp.Data.Recipe" />
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        card_view:cardCornerRadius="2dp"
+        card_view:contentPadding="10dp"
+        card_view:cardBackgroundColor="@color/cardBackground"
+        card_view:cardElevation="@dimen/cardElevation"
+        card_view:cardUseCompatPadding="true">
+
+        <TextView
+            android:id="@+id/country_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@{recipe.name,  default=@string/testingString}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
+
+    </android.support.v7.widget.CardView>
+</layout>
