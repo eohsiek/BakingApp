@@ -8,7 +8,7 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         android:layout_margin="5dp"
         card_view:cardCornerRadius="2dp"
         card_view:contentPadding="10dp"
@@ -20,9 +20,9 @@
             android:id="@+id/recipe_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="center"
             android:text="@{recipe.name,  default=@string/testingString}"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
+            style="@android:style/TextAppearance.DeviceDefault.Large"/>
 
     </android.support.v7.widget.CardView>
 </layout>
