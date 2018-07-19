@@ -33,6 +33,24 @@
             android:padding="@dimen/recipepadding"
             android:gravity="center"
             android:text="@{recipe.servings, default=@string/testingString}" />
+
+            <TextView
+                android:id="@+id/ingredients_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/recipepadding"
+                android:text="@string/ingredients_header"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_ingredients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/recipepadding"
+                android:gravity="center"
+                >
+            </android.support.v7.widget.RecyclerView>
         </LinearLayout>
 
 </ScrollView>

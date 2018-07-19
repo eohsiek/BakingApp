@@ -10,9 +10,13 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.example.android.bakingapp.Data.Ingredients;
 import com.example.android.bakingapp.Data.Recipe;
 import com.example.android.bakingapp.Data.RecipeAdapter;
 import com.example.android.bakingapp.Network.GetRecipeAsync;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity  implements
         GetRecipeAsync.OnTaskCompleted, RecipeAdapter.RecipeAdapterOnClickHandler {
@@ -47,9 +51,11 @@ public class MainActivity extends AppCompatActivity  implements
 
     @Override
     public void onClick(Recipe recipe) {
-        Log.i("ClickMain", "got to click");
+        Ingredients[] ingredients = recipe.getIngredients();
+        ArrayList<Ingredients> arrayIngredients = new ArrayList<Ingredients>(Arrays.asList(ingredients));
         Intent intent = new Intent(this, RecipeActivity.class);
         intent.putExtra("recipe", recipe);
+        intent.putParcelableArrayListExtra("ingredients", arrayIngredients);
         startActivity(intent);
     }
 }
