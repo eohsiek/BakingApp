@@ -4,4 +4,5 @@
     <dimen name="cardCornerRadius">5dp</dimen>
     <dimen name="cardContentPadding">10dp</dimen>
     <dimen name="cardLayoutMargin">5dp</dimen>
+    <dimen name="recipepadding">10dp</dimen>
 </resources>

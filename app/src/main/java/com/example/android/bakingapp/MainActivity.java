@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity  implements
     public void onClick(Recipe recipe) {
         Log.i("ClickMain", "got to click");
         Intent intent = new Intent(this, RecipeActivity.class);
-        intent.putExtra("Recipe", "test");
+        intent.putExtra("recipe", recipe);
         startActivity(intent);
     }
 }

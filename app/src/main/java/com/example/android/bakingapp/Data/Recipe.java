@@ -1,6 +1,9 @@
 package com.example.android.bakingapp.Data;
 
-public class Recipe
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Recipe implements Parcelable
 {
     private Ingredients[] ingredients;
 
@@ -16,6 +19,41 @@ public class Recipe
 
     public Recipe() {
     }
+
+    private Recipe(Parcel parcel) {
+        id = parcel.readString();
+        name = parcel.readString();
+        image = parcel.readString();
+        servings = parcel.readString();
+
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(name);
+        dest.writeString(image);
+        dest.writeString(servings);
+    }
+
+    public static final Parcelable.Creator<Recipe> CREATOR = new Parcelable.Creator<Recipe>(){
+
+        @Override
+        public Recipe createFromParcel(Parcel parcel) {
+            return new Recipe(parcel);
+        }
+
+        @Override
+        public Recipe[] newArray(int size) {
+            return new Recipe[0];
+        }
+    };
+
 
     public Ingredients[] getIngredients ()
     {
@@ -39,7 +77,7 @@ public class Recipe
 
     public String getServings ()
     {
-        return servings;
+        return servings + " servings";
     }
 
     public void setServings (String servings)
