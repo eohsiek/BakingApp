@@ -1,5 +1,7 @@
 package com.example.android.bakingapp;
 
+import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -13,7 +15,7 @@ import com.example.android.bakingapp.Data.RecipeAdapter;
 import com.example.android.bakingapp.Network.GetRecipeAsync;
 
 public class MainActivity extends AppCompatActivity  implements
-        GetRecipeAsync.OnTaskCompleted {
+        GetRecipeAsync.OnTaskCompleted, RecipeAdapter.RecipeAdapterOnClickHandler {
 
     private int columns;
     private TextView textView;
@@ -37,12 +39,17 @@ public class MainActivity extends AppCompatActivity  implements
 
     }
 
-
-
-
     @Override
     public void onTaskCompleted(Recipe[] response) {
-        adapter = new RecipeAdapter(response);
+        adapter = new RecipeAdapter(this, response);
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onClick(Recipe recipe) {
+        Log.i("ClickMain", "got to click");
+        Intent intent = new Intent(this, RecipeActivity.class);
+        intent.putExtra("Recipe", "test");
+        startActivity(intent);
     }
 }
