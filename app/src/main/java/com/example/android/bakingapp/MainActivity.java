@@ -51,14 +51,18 @@ public class MainActivity extends AppCompatActivity  implements
     public void onClick(Recipe recipe) {
         Ingredients[] ingredients = recipe.getIngredients();
         Steps[] steps = recipe.getSteps();
-        Log.i("step", steps[0].getDescription());
+
         ArrayList<Ingredients> arrayIngredients = new ArrayList<Ingredients>(Arrays.asList(ingredients));
         ArrayList<Steps> arraySteps = new ArrayList<Steps>(Arrays.asList(steps));
-        //Log.i("steps", String.valueOf(arraySteps));
+
         Intent intent = new Intent(this, RecipeActivity.class);
-        intent.putExtra("recipe", recipe);
-        intent.putParcelableArrayListExtra("steps", arraySteps);
-        intent.putParcelableArrayListExtra("ingredients", arrayIngredients);
+
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("recipe", recipe);
+        bundle.putParcelableArrayList("ingredients", arrayIngredients);
+        bundle.putParcelableArrayList("steps", arraySteps);
+        intent.putExtras(bundle);
+
         startActivity(intent);
     }
 }

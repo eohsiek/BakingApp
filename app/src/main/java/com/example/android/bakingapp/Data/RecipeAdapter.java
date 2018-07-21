@@ -22,7 +22,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     }
 
     public RecipeAdapter(RecipeAdapterOnClickHandler clickHandler, Recipe[] recipes) {
-        Log.i("ClickAdapter", "constructor started");
         this.recipes = recipes;
         mClickHandler = clickHandler;
     }
@@ -43,7 +42,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
         @Override
         public void onClick(View v) {
-            Log.i("ClickAdapter", "clicked here");
             int adapterPosition = getAdapterPosition();
             Recipe recipe = recipes[adapterPosition];
             mClickHandler.onClick(recipe);

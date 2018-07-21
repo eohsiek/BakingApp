@@ -23,15 +23,8 @@ public class RecipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
         Intent intent = getIntent();
-        recipe = intent.getParcelableExtra("recipe");
-        ingredients = intent.getParcelableArrayListExtra("ingredients").toArray(new Ingredients[0]);
-        steps = intent.getParcelableArrayListExtra("steps").toArray(new Steps[0]);
-
-        Bundle bundle = new Bundle();
-        bundle.putParcelable("recipe", recipe);
-        bundle.putParcelableArray("ingredients", ingredients);
-        bundle.putParcelableArray("steps", steps);
-
+        Bundle bundle = getIntent().getExtras();
+    
         RecipeFragment recipeFragment = new RecipeFragment();
         recipeFragment.setArguments(bundle);
 

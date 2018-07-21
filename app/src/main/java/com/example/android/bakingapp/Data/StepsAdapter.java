@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.android.bakingapp.R;
+import com.example.android.bakingapp.RecipeFragment;
 import com.example.android.bakingapp.databinding.StepsRecyclerViewBinding;
 
 public class StepsAdapter  extends RecyclerView.Adapter<StepsAdapter.StepsViewHolder> {
@@ -20,7 +21,8 @@ public class StepsAdapter  extends RecyclerView.Adapter<StepsAdapter.StepsViewHo
         void onClick(Steps step);
     }
 
-    public StepsAdapter(StepsAdapterOnClickHandler clickHandler, Steps[] steps) {
+    public StepsAdapter(RecipeFragment clickHandler, Steps[] steps) {
+        Log.i("ClickAdapter", "constructor");
         this.steps = steps;
         mClickHandler = clickHandler;
     }

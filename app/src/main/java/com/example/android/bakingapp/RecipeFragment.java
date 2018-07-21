@@ -39,11 +39,8 @@ public class RecipeFragment extends Fragment implements StepsAdapter.StepsAdapte
                              Bundle savedInstanceState) {
 
         Recipe recipe = getArguments().getParcelable("recipe");
-        String stepDescription = getArguments().getString("stepDescription");
-        Ingredients[] ingredients = (Ingredients[]) getArguments().getParcelableArray("ingredients");
-        Steps[] steps = (Steps[]) getArguments().getParcelableArray("steps");
-
-       // Log.i("steps", String.valueOf(stepDescription));
+        Ingredients[] ingredients = getArguments().getParcelableArrayList("ingredients").toArray(new Ingredients[0]);
+        Steps[] steps = getArguments().getParcelableArrayList("steps").toArray(new Steps[0]);
 
         FragmentRecipeBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_recipe, container, false);
 
@@ -67,6 +64,7 @@ public class RecipeFragment extends Fragment implements StepsAdapter.StepsAdapte
 
     @Override
     public void onClick(Steps step) {
+        Log.i("Clicked", "fragment");
         Context context =  getActivity();
         CharSequence text = "Clicked on step!";
         int duration = Toast.LENGTH_SHORT;
