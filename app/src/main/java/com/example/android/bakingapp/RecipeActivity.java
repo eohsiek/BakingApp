@@ -13,18 +13,12 @@ import com.example.android.bakingapp.Data.Steps;
 
 public class RecipeActivity extends AppCompatActivity {
 
-    private Recipe recipe;
-    private Ingredients[] ingredients;
-    private Steps[] steps;
-    private TextView textView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
-        Intent intent = getIntent();
         Bundle bundle = getIntent().getExtras();
-    
+
         RecipeFragment recipeFragment = new RecipeFragment();
         recipeFragment.setArguments(bundle);
 
