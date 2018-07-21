@@ -8,7 +8,7 @@
     </data>
 
 
-    <android.support.v4.widget.NestedScrollView
+    <ScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".RecipeFragment">
@@ -52,6 +52,15 @@
                 android:padding="@dimen/recipepadding" >
             </android.support.v7.widget.RecyclerView>
 
+            <TextView
+                android:id="@+id/steps_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/recipepadding"
+                android:text="@string/steps_header"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_steps"
                 android:layout_width="match_parent"
@@ -60,5 +69,5 @@
             </android.support.v7.widget.RecyclerView>
         </LinearLayout>
 
-</android.support.v4.widget.NestedScrollView>
+</ScrollView>
 </layout>

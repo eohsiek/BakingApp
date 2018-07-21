@@ -3,4 +3,5 @@
 
     <string name="testingString">This is a test string</string>
     <string name="ingredients_header">Ingredients</string>
+    <string name="steps_header">Steps</string>
 </resources>
