@@ -21,6 +21,10 @@ public class Steps implements Parcelable {
 
     private Steps(Parcel parcel) {
         id = parcel.readString();
+        shortDescription = parcel.readString();
+        description = parcel.readString();
+        videoURL = parcel.readString();
+        thumbnailURL = parcel.readString();
 
     }
 
@@ -32,6 +36,10 @@ public class Steps implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.id);
+        dest.writeString(this.shortDescription);
+        dest.writeString(this.description);
+        dest.writeString(this.videoURL);
+        dest.writeString(this.thumbnailURL);
 
     }
 
