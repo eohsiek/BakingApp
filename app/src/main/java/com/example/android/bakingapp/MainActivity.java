@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.android.bakingapp.Data.Ingredients;
 import com.example.android.bakingapp.Data.Recipe;
 import com.example.android.bakingapp.Data.RecipeAdapter;
+import com.example.android.bakingapp.Data.Steps;
 import com.example.android.bakingapp.Network.GetRecipeAsync;
 
 import java.util.ArrayList;
@@ -34,27 +35,29 @@ public class MainActivity extends AppCompatActivity  implements
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         columns = getResources().getInteger(R.integer.columns);
 
-
-        layoutManager = new GridLayoutManager(this, columns);
-        recyclerView.setLayoutManager(layoutManager);
-
         GetRecipeAsync task = new GetRecipeAsync(MainActivity.this);
         task.execute();
-
     }
 
     @Override
     public void onTaskCompleted(Recipe[] response) {
         adapter = new RecipeAdapter(this, response);
         recyclerView.setAdapter(adapter);
+        layoutManager = new GridLayoutManager(this, columns);
+        recyclerView.setLayoutManager(layoutManager);
     }
 
     @Override
     public void onClick(Recipe recipe) {
         Ingredients[] ingredients = recipe.getIngredients();
+        Steps[] steps = recipe.getSteps();
+        Log.i("step", steps[0].getDescription());
         ArrayList<Ingredients> arrayIngredients = new ArrayList<Ingredients>(Arrays.asList(ingredients));
+        //ArrayList<Steps> arraySteps = new ArrayList<Steps>(Arrays.asList(steps));
+        //Log.i("steps", String.valueOf(arraySteps));
         Intent intent = new Intent(this, RecipeActivity.class);
         intent.putExtra("recipe", recipe);
+        //intent.putParcelableArrayListExtra("steps", arraySteps);
         intent.putParcelableArrayListExtra("ingredients", arrayIngredients);
         startActivity(intent);
     }

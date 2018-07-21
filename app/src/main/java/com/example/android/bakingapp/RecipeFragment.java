@@ -1,6 +1,7 @@
 package com.example.android.bakingapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,17 +12,23 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.android.bakingapp.Data.Ingredients;
 import com.example.android.bakingapp.Data.IngredientsAdapter;
 import com.example.android.bakingapp.Data.Recipe;
+import com.example.android.bakingapp.Data.Steps;
+import com.example.android.bakingapp.Data.StepsAdapter;
 import com.example.android.bakingapp.databinding.FragmentRecipeBinding;
 
-public class RecipeFragment extends Fragment {
+public class RecipeFragment extends Fragment implements StepsAdapter.StepsAdapterOnClickHandler {
 
     private RecyclerView ingredientsRV;
+    private RecyclerView stepsRV;
     private LinearLayoutManager ingredientsLayoutManager;
+    private LinearLayoutManager stepsLayoutManager;
     private IngredientsAdapter ingredientsAdapter;
+    private StepsAdapter stepsAdapter;
 
     public RecipeFragment() {
         // Required empty public constructor
@@ -32,9 +39,11 @@ public class RecipeFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         Recipe recipe = getArguments().getParcelable("recipe");
+        String stepDescription = getArguments().getString("stepDescription");
         Ingredients[] ingredients = (Ingredients[]) getArguments().getParcelableArray("ingredients");
+        //Steps[] steps = (Steps[]) getArguments().getParcelableArray("steps");
 
-        Log.i("FragmentIngredients", ingredients.toString());
+       // Log.i("steps", String.valueOf(stepDescription));
 
         FragmentRecipeBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_recipe, container, false);
 
@@ -46,8 +55,21 @@ public class RecipeFragment extends Fragment {
         ingredientsRV.setLayoutManager(ingredientsLayoutManager);
         ingredientsAdapter = new IngredientsAdapter(ingredients);
         ingredientsRV.setAdapter(ingredientsAdapter);
-
+/*
+        stepsRV = view.findViewById(R.id.rv_steps);
+        stepsLayoutManager = new LinearLayoutManager(this.getActivity());
+        stepsRV.setLayoutManager(stepsLayoutManager);
+        stepsAdapter = new StepsAdapter(this, steps);
+        stepsRV.setAdapter(stepsAdapter);
+*/
         return view;
     }
 
+    @Override
+    public void onClick(Steps step) {
+        Context context =  getActivity();
+        CharSequence text = "Clicked on step!";
+        int duration = Toast.LENGTH_SHORT;
+        Toast.makeText(context, text, duration).show();
+    }
 }

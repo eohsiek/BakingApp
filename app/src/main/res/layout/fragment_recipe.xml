@@ -8,14 +8,16 @@
     </data>
 
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".RecipeFragment">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            >
 
         <TextView
             android:layout_width="match_parent"
@@ -47,11 +49,16 @@
                 android:id="@+id/rv_ingredients"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/recipepadding"
-                android:gravity="center"
-                >
+                android:padding="@dimen/recipepadding" >
+            </android.support.v7.widget.RecyclerView>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_steps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/recipepadding" >
             </android.support.v7.widget.RecyclerView>
         </LinearLayout>
 
-</ScrollView>
+</android.support.v4.widget.NestedScrollView>
 </layout>

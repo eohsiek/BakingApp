@@ -1,8 +1,10 @@
 package com.example.android.bakingapp.Data;
 
 
-public class Steps
-{
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Steps implements Parcelable {
     private String id;
 
     private String shortDescription;
@@ -12,6 +14,38 @@ public class Steps
     private String videoURL;
 
     private String thumbnailURL;
+
+
+    public Steps() {
+    }
+
+    private Steps(Parcel parcel) {
+        id = parcel.readString();
+
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+
+    }
+
+    public static final Parcelable.Creator<Steps> CREATOR = new Parcelable.Creator<Steps>(){
+        @Override
+        public Steps createFromParcel(Parcel parcel) {
+            return new Steps(parcel);
+        }
+
+        @Override
+        public Steps[] newArray(int size) {
+            return new Steps[0];
+        }
+    };
 
     public String getId ()
     {
@@ -68,4 +102,6 @@ public class Steps
     {
         return "ClassPojo [id = "+id+", shortDescription = "+shortDescription+", description = "+description+", videoURL = "+videoURL+", thumbnailURL = "+thumbnailURL+"]";
     }
+
+
 }
