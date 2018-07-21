@@ -53,11 +53,11 @@ public class MainActivity extends AppCompatActivity  implements
         Steps[] steps = recipe.getSteps();
         Log.i("step", steps[0].getDescription());
         ArrayList<Ingredients> arrayIngredients = new ArrayList<Ingredients>(Arrays.asList(ingredients));
-        //ArrayList<Steps> arraySteps = new ArrayList<Steps>(Arrays.asList(steps));
+        ArrayList<Steps> arraySteps = new ArrayList<Steps>(Arrays.asList(steps));
         //Log.i("steps", String.valueOf(arraySteps));
         Intent intent = new Intent(this, RecipeActivity.class);
         intent.putExtra("recipe", recipe);
-        //intent.putParcelableArrayListExtra("steps", arraySteps);
+        intent.putParcelableArrayListExtra("steps", arraySteps);
         intent.putParcelableArrayListExtra("ingredients", arrayIngredients);
         startActivity(intent);
     }

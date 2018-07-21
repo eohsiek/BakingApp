@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@{step.id,  default=@string/testingString}"
+        android:text="@{step.shortDescription,  default=@string/testingString}"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
 </layout>

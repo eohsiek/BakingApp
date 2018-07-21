@@ -41,7 +41,7 @@ public class RecipeFragment extends Fragment implements StepsAdapter.StepsAdapte
         Recipe recipe = getArguments().getParcelable("recipe");
         String stepDescription = getArguments().getString("stepDescription");
         Ingredients[] ingredients = (Ingredients[]) getArguments().getParcelableArray("ingredients");
-        //Steps[] steps = (Steps[]) getArguments().getParcelableArray("steps");
+        Steps[] steps = (Steps[]) getArguments().getParcelableArray("steps");
 
        // Log.i("steps", String.valueOf(stepDescription));
 
@@ -55,13 +55,13 @@ public class RecipeFragment extends Fragment implements StepsAdapter.StepsAdapte
         ingredientsRV.setLayoutManager(ingredientsLayoutManager);
         ingredientsAdapter = new IngredientsAdapter(ingredients);
         ingredientsRV.setAdapter(ingredientsAdapter);
-/*
+
         stepsRV = view.findViewById(R.id.rv_steps);
         stepsLayoutManager = new LinearLayoutManager(this.getActivity());
         stepsRV.setLayoutManager(stepsLayoutManager);
         stepsAdapter = new StepsAdapter(this, steps);
         stepsRV.setAdapter(stepsAdapter);
-*/
+
         return view;
     }
 

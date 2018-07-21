@@ -9,11 +9,13 @@ import android.widget.TextView;
 
 import com.example.android.bakingapp.Data.Ingredients;
 import com.example.android.bakingapp.Data.Recipe;
+import com.example.android.bakingapp.Data.Steps;
 
 public class RecipeActivity extends AppCompatActivity {
 
     private Recipe recipe;
     private Ingredients[] ingredients;
+    private Steps[] steps;
     private TextView textView;
 
     @Override
@@ -23,10 +25,12 @@ public class RecipeActivity extends AppCompatActivity {
         Intent intent = getIntent();
         recipe = intent.getParcelableExtra("recipe");
         ingredients = intent.getParcelableArrayListExtra("ingredients").toArray(new Ingredients[0]);
+        steps = intent.getParcelableArrayListExtra("steps").toArray(new Steps[0]);
 
         Bundle bundle = new Bundle();
         bundle.putParcelable("recipe", recipe);
         bundle.putParcelableArray("ingredients", ingredients);
+        bundle.putParcelableArray("steps", steps);
 
         RecipeFragment recipeFragment = new RecipeFragment();
         recipeFragment.setArguments(bundle);
