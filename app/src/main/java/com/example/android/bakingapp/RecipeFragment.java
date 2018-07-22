@@ -64,7 +64,7 @@ public class RecipeFragment extends Fragment implements StepsAdapter.StepsAdapte
     public void onClick(Steps step) {
         Log.i("Clicked", "fragment");
         Context context =  getActivity();
-        CharSequence text = "Clicked on step!";
+        CharSequence text = "Clicked the step!";
         int duration = Toast.LENGTH_SHORT;
         Toast.makeText(context, text, duration).show();
     }
