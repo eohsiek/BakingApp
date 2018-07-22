@@ -1,16 +1,14 @@
 package com.example.android.bakingapp;
 
-import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.android.bakingapp.Data.Ingredients;
 import com.example.android.bakingapp.Data.IngredientsAdapter;
@@ -62,10 +60,10 @@ public class RecipeFragment extends Fragment implements StepsAdapter.StepsAdapte
 
     @Override
     public void onClick(Steps step) {
-        Log.i("Clicked", "fragment");
-        Context context =  getActivity();
-        CharSequence text = "Clicked the step!";
-        int duration = Toast.LENGTH_SHORT;
-        Toast.makeText(context, text, duration).show();
+        Intent intent = new Intent(getActivity(), StepsActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("step", step);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }
