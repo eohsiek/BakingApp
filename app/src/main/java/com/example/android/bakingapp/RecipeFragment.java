@@ -44,12 +44,14 @@ public class RecipeFragment extends Fragment implements StepsAdapter.StepsAdapte
         View view = binding.getRoot();
 
         ingredientsRV = view.findViewById(R.id.rv_ingredients);
+        ingredientsRV.setNestedScrollingEnabled(false);
         ingredientsLayoutManager = new LinearLayoutManager(this.getActivity());
         ingredientsRV.setLayoutManager(ingredientsLayoutManager);
         ingredientsAdapter = new IngredientsAdapter(ingredients);
         ingredientsRV.setAdapter(ingredientsAdapter);
 
         stepsRV = view.findViewById(R.id.rv_steps);
+        stepsRV.setNestedScrollingEnabled(false);
         stepsLayoutManager = new LinearLayoutManager(this.getActivity());
         stepsRV.setLayoutManager(stepsLayoutManager);
         stepsAdapter = new StepsAdapter(this, steps);
