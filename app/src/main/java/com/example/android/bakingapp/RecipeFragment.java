@@ -71,11 +71,10 @@ public class RecipeFragment extends Fragment implements StepsAdapter.StepsAdapte
             android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             Bundle bundle = new Bundle();
-            Bundle bundlesteps = new Bundle();
-            bundlesteps.putParcelable("step", step);
+            bundle.putParcelable("step", step);
 
             StepsFragment stepsFragment = new StepsFragment();
-            stepsFragment.setArguments(bundlesteps);
+            stepsFragment.setArguments(bundle);
 
             transaction.replace(R.id.steps_container, stepsFragment);
             transaction.commit();
