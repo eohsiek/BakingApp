@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.android.bakingapp.Data.Ingredients;
 import com.example.android.bakingapp.Data.IngredientsAdapter;
@@ -25,6 +27,7 @@ public class RecipeFragment extends Fragment implements StepsAdapter.StepsAdapte
     private LinearLayoutManager stepsLayoutManager;
     private IngredientsAdapter ingredientsAdapter;
     private StepsAdapter stepsAdapter;
+    private View view;
 
     public RecipeFragment() {
         // Required empty public constructor
@@ -34,6 +37,8 @@ public class RecipeFragment extends Fragment implements StepsAdapter.StepsAdapte
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
+
         Recipe recipe = getArguments().getParcelable("recipe");
         Ingredients[] ingredients = getArguments().getParcelableArrayList("ingredients").toArray(new Ingredients[0]);
         Steps[] steps = getArguments().getParcelableArrayList("steps").toArray(new Steps[0]);
@@ -41,7 +46,7 @@ public class RecipeFragment extends Fragment implements StepsAdapter.StepsAdapte
         FragmentRecipeBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_recipe, container, false);
 
         binding.setRecipe(recipe);
-        View view = binding.getRoot();
+        view = binding.getRoot();
 
         ingredientsRV = view.findViewById(R.id.rv_ingredients);
         ingredientsRV.setNestedScrollingEnabled(false);
@@ -62,10 +67,25 @@ public class RecipeFragment extends Fragment implements StepsAdapter.StepsAdapte
 
     @Override
     public void onClick(Steps step) {
-        Intent intent = new Intent(getActivity(), StepsActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putParcelable("step", step);
-        intent.putExtras(bundle);
-        startActivity(intent);
+        if(getActivity().findViewById(R.id.steps_container) != null) {
+            android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            Bundle bundle = new Bundle();
+            Bundle bundlesteps = new Bundle();
+            bundlesteps.putParcelable("step", step);
+
+            StepsFragment stepsFragment = new StepsFragment();
+            stepsFragment.setArguments(bundlesteps);
+
+            transaction.replace(R.id.steps_container, stepsFragment);
+            transaction.commit();
+        }
+        else {
+            Intent intent = new Intent(getActivity(), StepsActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("step", step);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
     }
 }
