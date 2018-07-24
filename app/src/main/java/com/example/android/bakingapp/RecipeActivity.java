@@ -1,5 +1,6 @@
 package com.example.android.bakingapp;
 
+import android.os.Parcelable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,8 @@ import com.example.android.bakingapp.Data.Steps;
 
 
 public class RecipeActivity extends AppCompatActivity {
+
+    private static final String BUNDLE_RECYCLER_LAYOUT = "classname.recycler.layout";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,4 +41,15 @@ public class RecipeActivity extends AppCompatActivity {
 
         transaction.commit();
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
 }
