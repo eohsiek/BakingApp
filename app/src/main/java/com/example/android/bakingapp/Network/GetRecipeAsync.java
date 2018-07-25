@@ -1,11 +1,9 @@
 package com.example.android.bakingapp.Network;
 
-import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
-import com.example.android.bakingapp.Data.Recipe;
 import com.example.android.bakingapp.MainActivity;
-import com.google.gson.Gson;
 
 import java.util.concurrent.TimeUnit;
 
@@ -14,9 +12,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class GetRecipeAsync extends AsyncTask<String, String, Recipe[]> {
-
-    private Context context;
+public class GetRecipeAsync extends AsyncTask<String, String, String> {
 
     final OkHttpClient client = new OkHttpClient();
     final Request request = new Request.Builder()
@@ -32,16 +28,14 @@ public class GetRecipeAsync extends AsyncTask<String, String, Recipe[]> {
     }
 
     @Override
-    protected Recipe[] doInBackground(String... params) {
+    protected String doInBackground(String... params) {
         try {
             Response response = client.newCall(request).execute();
             if (!response.isSuccessful()) {
                 return null;
             }
             String responsestring = response.body().string();
-            Gson gson = new Gson();
-            Recipe[] recipeArray = gson.fromJson(responsestring, Recipe[].class);
-            return recipeArray;
+            return responsestring;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -49,13 +43,12 @@ public class GetRecipeAsync extends AsyncTask<String, String, Recipe[]> {
     }
 
     @Override
-    protected void onPostExecute(Recipe[] result) {
-
+    protected void onPostExecute(String result) {
         taskCompleted.onTaskCompleted(result);
     }
 
     public interface OnTaskCompleted {
-        void onTaskCompleted(Recipe[] response);
+        void onTaskCompleted(String response);
     }
 }
 
