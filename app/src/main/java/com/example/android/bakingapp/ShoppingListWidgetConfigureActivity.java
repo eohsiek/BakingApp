@@ -14,7 +14,7 @@ import android.widget.EditText;
  */
 public class ShoppingListWidgetConfigureActivity extends Activity {
 
-    private static final String PREFS_NAME = "com.example.android.bakingapp.ShoppingListWidget";
+    private static final String PREFS_NAME = "SavedRecipes";
     private static final String PREF_PREFIX_KEY = "appwidget_";
     int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
     EditText mAppWidgetText;

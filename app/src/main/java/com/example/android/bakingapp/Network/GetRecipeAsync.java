@@ -1,7 +1,6 @@
 package com.example.android.bakingapp.Network;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.example.android.bakingapp.MainActivity;
 
