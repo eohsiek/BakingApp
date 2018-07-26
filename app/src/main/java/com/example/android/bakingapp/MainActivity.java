@@ -1,11 +1,12 @@
 package com.example.android.bakingapp;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -23,6 +24,7 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity  implements
         GetRecipeAsync.OnTaskCompleted, RecipeAdapter.RecipeAdapterOnClickHandler {
@@ -36,6 +38,9 @@ public class MainActivity extends AppCompatActivity  implements
     private TextView errorMessage;
     private TextView recipeHeader;
     public static final String RECIPES = "SavedRecipes";
+    public static final String PREF_RECIPES_JSON = "recipeJSON";
+    public static final String PREF_SELECTED_NAME = "recipeName";
+    public static final String PREF_INGREDIENTS = "ingredients";
     private String recipeJSON;
 
 
@@ -52,7 +57,7 @@ public class MainActivity extends AppCompatActivity  implements
         errorMessage =  findViewById(R.id.networkerror);
         recipeHeader = findViewById(R.id.selectrecipe);
 
-        recipeJSON = preferences.getString("recipeJSON", null);
+        recipeJSON = preferences.getString(PREF_RECIPES_JSON, null);
 
         if (recipeJSON == null) {
             //recipes not in shared preferences, get from source if available, else show error
@@ -74,7 +79,7 @@ public class MainActivity extends AppCompatActivity  implements
     public void onTaskCompleted(String jsonString) {
         recipeJSON = jsonString;
         SharedPreferences.Editor editor = getSharedPreferences(RECIPES, MODE_PRIVATE).edit();
-        editor.putString("recipeJSON", recipeJSON);
+        editor.putString(PREF_RECIPES_JSON, recipeJSON);
         editor.apply();
 
         showRecipes();
@@ -87,6 +92,19 @@ public class MainActivity extends AppCompatActivity  implements
 
         ArrayList<Ingredients> arrayIngredients = new ArrayList<Ingredients>(Arrays.asList(ingredients));
         ArrayList<Steps> arraySteps = new ArrayList<Steps>(Arrays.asList(steps));
+
+
+        Gson gson = new Gson();
+        String ingredientsjson = gson.toJson(ingredients);
+
+        SharedPreferences.Editor editor = getSharedPreferences(RECIPES, MODE_PRIVATE).edit();
+        editor.putString(PREF_SELECTED_NAME, recipe.getName());
+        editor.putString(PREF_INGREDIENTS, ingredientsjson);
+        editor.apply();
+
+        int[] ids = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), RecipeIngredientsWidget.class));
+        RecipeIngredientsWidget widget = new RecipeIngredientsWidget();
+        widget.onUpdate(this, AppWidgetManager.getInstance(this),ids);
 
         Intent intent = new Intent(this, RecipeActivity.class);
 
@@ -137,4 +155,5 @@ public class MainActivity extends AppCompatActivity  implements
         NetworkInfo network = connectivityManager.getActiveNetworkInfo();
         return network != null && network.isConnectedOrConnecting();
     }
+
 }
