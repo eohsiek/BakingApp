@@ -26,4 +26,5 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             />
     </LinearLayout>
+
 </layout>
