@@ -68,11 +68,12 @@ public class RecipeFragment extends Fragment implements StepsAdapter.StepsAdapte
 
     @Override
     public void onClick(Steps step) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("step", step);
+
         if(getActivity().findViewById(R.id.steps_container) != null) {
             android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
-            Bundle bundle = new Bundle();
-            bundle.putParcelable("step", step);
 
             StepsFragment stepsFragment = new StepsFragment();
             stepsFragment.setArguments(bundle);
@@ -82,8 +83,7 @@ public class RecipeFragment extends Fragment implements StepsAdapter.StepsAdapte
         }
         else {
             Intent intent = new Intent(getActivity(), StepsActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putParcelable("step", step);
+
             intent.putExtras(bundle);
             startActivity(intent);
         }
