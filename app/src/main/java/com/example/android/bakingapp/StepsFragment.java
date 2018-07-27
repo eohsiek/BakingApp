@@ -6,6 +6,7 @@ https://github.com/googlecodelabs/exoplayer-intro/blob/master/exoplayer-codelab-
 package com.example.android.bakingapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
@@ -30,6 +31,9 @@ import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class StepsFragment extends Fragment {
@@ -58,8 +62,8 @@ public class StepsFragment extends Fragment {
         numberSteps = getArguments().getInt("numberSteps");
         currentStep = getArguments().getInt("currentStep");
 
-        previousButton =  getActivity().findViewById(R.id.previousButton);
-        nextButton =  getActivity().findViewById(R.id.nextButton);
+        previousButton = getActivity().findViewById(R.id.previousButton);
+        nextButton = getActivity().findViewById(R.id.nextButton);
 
         videoURL = step.getVideoURL();
 
@@ -70,8 +74,12 @@ public class StepsFragment extends Fragment {
         View view = binding.getRoot();
 
         setButtonVisibility();
-        addListenerPreviousButton();
-        addListenerNextButton();
+        if (currentStep != 0) {
+            addListenerPreviousButton();
+        }
+        if (currentStep < numberSteps) {
+            addListenerNextButton();
+        }
 
         return view;
     }
@@ -152,31 +160,27 @@ public class StepsFragment extends Fragment {
     }
 
     public void addListenerPreviousButton() {
-
-
-
         previousButton.setOnClickListener(new View.OnClickListener() {
-
+            int stepNumber = currentStep-1;
+            Steps laststep = steps[stepNumber];
             @Override
-            public void onClick(View arg0) {
-                Toast.makeText(getActivity(), "Previous Button Clicked!" + String.valueOf(currentStep), Toast.LENGTH_LONG).show();
+            public void onClick(View view) {
+                goToStep(laststep, stepNumber);
             }
         });
 
     }
 
     public void addListenerNextButton() {
-
-
-
         nextButton.setOnClickListener(new View.OnClickListener() {
+            int stepNumber = currentStep+1;
+            Steps nextstep = steps[stepNumber];
 
             @Override
-            public void onClick(View arg0) {
-                Toast.makeText(getActivity(), "Next Button Clicked!" + String.valueOf(currentStep), Toast.LENGTH_LONG).show();
+            public void onClick(View view) {
+                goToStep(nextstep, stepNumber);
             }
         });
-
     }
 
     public void setButtonVisibility() {
@@ -186,6 +190,21 @@ public class StepsFragment extends Fragment {
         if (currentStep == numberSteps-1) {
             nextButton.setVisibility(View.GONE);
         }
+    }
+
+    public void goToStep(Steps step, int stepNumber) {
+
+        ArrayList<Steps> arraySteps = new ArrayList<Steps>(Arrays.asList(steps));
+
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("step", step);
+        bundle.putParcelableArrayList("steps", arraySteps);
+        bundle.putInt("numberSteps", numberSteps);
+        bundle.putInt("currentStep", stepNumber);
+
+        Intent intent = new Intent(getActivity(), StepsActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
 

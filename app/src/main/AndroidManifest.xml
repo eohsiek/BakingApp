@@ -20,11 +20,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RecipeActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name=".RecipeActivity" />
         <activity
-            android:name=".StepsActivity"
-            android:parentActivityName=".StepsActivity" />
+            android:name=".StepsActivity" />
 
         <receiver android:name=".RecipeIngredientsWidget">
             <intent-filter>
