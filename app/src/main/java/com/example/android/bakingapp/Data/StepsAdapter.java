@@ -18,11 +18,10 @@ public class StepsAdapter  extends RecyclerView.Adapter<StepsAdapter.StepsViewHo
     private StepsAdapterOnClickHandler mClickHandler;
 
     public interface StepsAdapterOnClickHandler {
-        void onClick(Steps step);
+        void onClick(Steps step, int position);
     }
 
     public StepsAdapter(RecipeFragment clickHandler, Steps[] steps) {
-        Log.i("ClickAdapter", "constructor");
         this.steps = steps;
         mClickHandler = clickHandler;
     }
@@ -43,10 +42,9 @@ public class StepsAdapter  extends RecyclerView.Adapter<StepsAdapter.StepsViewHo
 
         @Override
         public void onClick(View v) {
-            Log.i("ClickAdapter", "clicked here");
             int adapterPosition = getAdapterPosition();
             Steps step = steps[adapterPosition];
-            mClickHandler.onClick(step);
+            mClickHandler.onClick(step, adapterPosition);
         }
     }
 

@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ public class RecipeFragment extends Fragment implements StepsAdapter.StepsAdapte
     private IngredientsAdapter ingredientsAdapter;
     private StepsAdapter stepsAdapter;
     private View view;
+    private Steps[] steps;
 
     public RecipeFragment() {
         // Required empty public constructor
@@ -42,7 +44,7 @@ public class RecipeFragment extends Fragment implements StepsAdapter.StepsAdapte
 
         Recipe recipe = getArguments().getParcelable("recipe");
         Ingredients[] ingredients = getArguments().getParcelableArrayList("ingredients").toArray(new Ingredients[0]);
-        Steps[] steps = getArguments().getParcelableArrayList("steps").toArray(new Steps[0]);
+        steps = getArguments().getParcelableArrayList("steps").toArray(new Steps[0]);
 
         FragmentRecipeBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_recipe, container, false);
 
@@ -67,7 +69,11 @@ public class RecipeFragment extends Fragment implements StepsAdapter.StepsAdapte
     }
 
     @Override
-    public void onClick(Steps step) {
+    public void onClick(Steps step, int position) {
+
+        int arraylength = steps.length;
+        Log.i("arraylength", String.valueOf(arraylength));
+        Log.i("positionclicked", String.valueOf(position));
         Bundle bundle = new Bundle();
         bundle.putParcelable("step", step);
 
