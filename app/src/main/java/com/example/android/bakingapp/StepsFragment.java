@@ -16,6 +16,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.android.bakingapp.Data.Steps;
 import com.example.android.bakingapp.databinding.FragmentStepsBinding;
@@ -36,6 +38,8 @@ public class StepsFragment extends Fragment {
     private PlayerView playerView;
     private Context context;
     private String videoURL;
+    private Button previousButton;
+    private Button nextButton;
 
     private long playbackPosition;
     private int currentWindow;
@@ -55,7 +59,8 @@ public class StepsFragment extends Fragment {
         binding.setStep(step);
         View view = binding.getRoot();
 
-
+        addListenerPreviousButton();
+        addListenerNextButton();
 
         return view;
     }
@@ -133,6 +138,34 @@ public class StepsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+    }
+
+    public void addListenerPreviousButton() {
+
+        previousButton =  getActivity().findViewById(R.id.previousButton);
+
+        previousButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Toast.makeText(getActivity(), "Previous Button Clicked!", Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
+    public void addListenerNextButton() {
+
+        nextButton =  getActivity().findViewById(R.id.nextButton);
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Toast.makeText(getActivity(), "Next Button Clicked!", Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
 
