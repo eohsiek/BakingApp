@@ -78,7 +78,7 @@ public class StepsFragment extends Fragment {
             if (currentStep != 0) {
                 addListenerPreviousButton();
             }
-            if (currentStep < numberSteps) {
+            if (currentStep != numberSteps-1) {
                 addListenerNextButton();
             }
         }
