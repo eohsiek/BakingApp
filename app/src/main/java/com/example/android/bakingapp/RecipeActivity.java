@@ -7,6 +7,9 @@ import android.os.Bundle;
 
 import com.example.android.bakingapp.Data.Steps;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 
 public class RecipeActivity extends AppCompatActivity {
 
@@ -29,9 +32,17 @@ public class RecipeActivity extends AppCompatActivity {
         if(findViewById(R.id.steps_container) != null) {
 
             Steps[] steps = bundle.getParcelableArrayList("steps").toArray(new Steps[0]);
+            int arraylength = steps.length;
             Steps firststep = steps[0];
+
+            ArrayList<Steps> arraySteps = new ArrayList<Steps>(Arrays.asList(steps));
+
             Bundle bundlesteps = new Bundle();
             bundlesteps.putParcelable("step", firststep);
+            bundlesteps.putParcelableArrayList("steps", arraySteps);
+            bundlesteps.putInt("numberSteps", arraylength);
+            bundlesteps.putInt("currentStep", 0);
+
 
             StepsFragment stepsFragment = new StepsFragment();
             stepsFragment.setArguments(bundlesteps);

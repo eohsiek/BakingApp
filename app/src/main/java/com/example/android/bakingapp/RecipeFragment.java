@@ -75,9 +75,6 @@ public class RecipeFragment extends Fragment implements StepsAdapter.StepsAdapte
     public void onClick(Steps step, int position) {
 
         int arraylength = steps.length;
-        Log.i("arraylength", String.valueOf(arraylength));
-        Log.i("positionclicked", String.valueOf(position));
-
         ArrayList<Steps> arraySteps = new ArrayList<Steps>(Arrays.asList(steps));
 
         Bundle bundle = new Bundle();
