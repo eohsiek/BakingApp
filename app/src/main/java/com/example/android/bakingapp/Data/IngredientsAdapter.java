@@ -2,9 +2,7 @@ package com.example.android.bakingapp.Data;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +43,7 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull IngredientsViewHolder holder, int position) {
+    public void onBindViewHolder(IngredientsViewHolder holder, int position) {
         Ingredients status = ingredients[position];
         holder.bind(status);
 
