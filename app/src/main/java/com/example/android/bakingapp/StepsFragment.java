@@ -44,6 +44,9 @@ public class StepsFragment extends Fragment {
     private long playbackPosition;
     private int currentWindow;
     private boolean playWhenReady = true;
+    private Steps[] steps;
+    private int numberSteps;
+    private int currentStep;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,6 +54,10 @@ public class StepsFragment extends Fragment {
 
         context = getActivity();
         Steps step = getArguments().getParcelable("step");
+        steps = getArguments().getParcelableArrayList("steps").toArray(new Steps[0]);
+        numberSteps = getArguments().getInt("numberSteps");
+        currentStep = getArguments().getInt("currentStep");
+
         videoURL = step.getVideoURL();
 
 
@@ -148,7 +155,7 @@ public class StepsFragment extends Fragment {
 
             @Override
             public void onClick(View arg0) {
-                Toast.makeText(getActivity(), "Previous Button Clicked!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Previous Button Clicked!" + String.valueOf(currentStep), Toast.LENGTH_LONG).show();
             }
         });
 
@@ -162,7 +169,7 @@ public class StepsFragment extends Fragment {
 
             @Override
             public void onClick(View arg0) {
-                Toast.makeText(getActivity(), "Next Button Clicked!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Next Button Clicked!" + String.valueOf(currentStep), Toast.LENGTH_LONG).show();
             }
         });
 

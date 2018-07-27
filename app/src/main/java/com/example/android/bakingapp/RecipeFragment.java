@@ -21,6 +21,9 @@ import com.example.android.bakingapp.Data.Steps;
 import com.example.android.bakingapp.Data.StepsAdapter;
 import com.example.android.bakingapp.databinding.FragmentRecipeBinding;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class RecipeFragment extends Fragment implements StepsAdapter.StepsAdapterOnClickHandler {
 
     private RecyclerView ingredientsRV;
@@ -74,8 +77,14 @@ public class RecipeFragment extends Fragment implements StepsAdapter.StepsAdapte
         int arraylength = steps.length;
         Log.i("arraylength", String.valueOf(arraylength));
         Log.i("positionclicked", String.valueOf(position));
+
+        ArrayList<Steps> arraySteps = new ArrayList<Steps>(Arrays.asList(steps));
+
         Bundle bundle = new Bundle();
         bundle.putParcelable("step", step);
+        bundle.putParcelableArrayList("steps", arraySteps);
+        bundle.putInt("numberSteps", arraylength);
+        bundle.putInt("currentStep", position);
 
         if(getActivity().findViewById(R.id.steps_container) != null) {
             android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
