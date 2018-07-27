@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -41,7 +42,9 @@ public class MainActivity extends AppCompatActivity  implements
     public static final String PREF_RECIPES_JSON = "recipeJSON";
     public static final String PREF_SELECTED_NAME = "recipeName";
     public static final String PREF_INGREDIENTS = "ingredients";
+    private static final String BUNDLE_RECYCLER_LAYOUT = "classname.recycler.layout";
     private String recipeJSON;
+    private Parcelable savedRecyclerLayoutState;
 
 
     @Override
@@ -119,19 +122,30 @@ public class MainActivity extends AppCompatActivity  implements
 
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        outState.putParcelable(BUNDLE_RECYCLER_LAYOUT,
+                recyclerView.getLayoutManager().onSaveInstanceState());
+
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
+        if (savedInstanceState != null) {
+            savedRecyclerLayoutState = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
+        }
     }
+
 
     private  void showRecipes() {
         errorMessage.setVisibility(View.INVISIBLE);
         recyclerView.setVisibility(View.VISIBLE);
         recipeHeader.setVisibility(View.VISIBLE);
+
+        if(savedRecyclerLayoutState!=null){
+            recyclerView.getLayoutManager().onRestoreInstanceState(savedRecyclerLayoutState);
+        }
 
         Gson gson = new Gson();
         Recipe[] recipeArray = gson.fromJson(recipeJSON, Recipe[].class);
