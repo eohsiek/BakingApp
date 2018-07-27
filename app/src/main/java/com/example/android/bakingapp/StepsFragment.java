@@ -58,6 +58,9 @@ public class StepsFragment extends Fragment {
         numberSteps = getArguments().getInt("numberSteps");
         currentStep = getArguments().getInt("currentStep");
 
+        previousButton =  getActivity().findViewById(R.id.previousButton);
+        nextButton =  getActivity().findViewById(R.id.nextButton);
+
         videoURL = step.getVideoURL();
 
 
@@ -66,6 +69,7 @@ public class StepsFragment extends Fragment {
         binding.setStep(step);
         View view = binding.getRoot();
 
+        setButtonVisibility();
         addListenerPreviousButton();
         addListenerNextButton();
 
@@ -149,7 +153,7 @@ public class StepsFragment extends Fragment {
 
     public void addListenerPreviousButton() {
 
-        previousButton =  getActivity().findViewById(R.id.previousButton);
+
 
         previousButton.setOnClickListener(new View.OnClickListener() {
 
@@ -163,7 +167,7 @@ public class StepsFragment extends Fragment {
 
     public void addListenerNextButton() {
 
-        nextButton =  getActivity().findViewById(R.id.nextButton);
+
 
         nextButton.setOnClickListener(new View.OnClickListener() {
 
@@ -173,6 +177,15 @@ public class StepsFragment extends Fragment {
             }
         });
 
+    }
+
+    public void setButtonVisibility() {
+        if (currentStep == 0) {
+            previousButton.setVisibility(View.GONE);
+        }
+        if (currentStep == numberSteps-1) {
+            nextButton.setVisibility(View.GONE);
+        }
     }
 
 
