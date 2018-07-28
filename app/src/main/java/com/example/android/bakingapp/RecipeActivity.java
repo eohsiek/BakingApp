@@ -19,37 +19,39 @@ public class RecipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
         Bundle bundle = getIntent().getExtras();
+        if (savedInstanceState == null) {
 
-        RecipeFragment recipeFragment = new RecipeFragment();
-        recipeFragment.setArguments(bundle);
+            RecipeFragment recipeFragment = new RecipeFragment();
+            recipeFragment.setArguments(bundle);
 
-        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.add(R.id.recipe_container, recipeFragment);
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.add(R.id.recipe_container, recipeFragment);
 
-        // This container will only initially exist in the two-pane tablet case
-        if(findViewById(R.id.steps_container) != null) {
+            // This container will only initially exist in the two-pane tablet case
+            if (findViewById(R.id.steps_container) != null) {
 
-            Steps[] steps = bundle.getParcelableArrayList("steps").toArray(new Steps[0]);
-            int arraylength = steps.length;
-            Steps firststep = steps[0];
+                Steps[] steps = bundle.getParcelableArrayList("steps").toArray(new Steps[0]);
+                int arraylength = steps.length;
+                Steps firststep = steps[0];
 
-            ArrayList<Steps> arraySteps = new ArrayList<Steps>(Arrays.asList(steps));
+                ArrayList<Steps> arraySteps = new ArrayList<Steps>(Arrays.asList(steps));
 
-            Bundle bundlesteps = new Bundle();
-            bundlesteps.putParcelable("step", firststep);
-            bundlesteps.putParcelableArrayList("steps", arraySteps);
-            bundlesteps.putInt("numberSteps", arraylength);
-            bundlesteps.putInt("currentStep", 0);
+                Bundle bundlesteps = new Bundle();
+                bundlesteps.putParcelable("step", firststep);
+                bundlesteps.putParcelableArrayList("steps", arraySteps);
+                bundlesteps.putInt("numberSteps", arraylength);
+                bundlesteps.putInt("currentStep", 0);
 
 
-            StepsFragment stepsFragment = new StepsFragment();
-            stepsFragment.setArguments(bundlesteps);
+                StepsFragment stepsFragment = new StepsFragment();
+                stepsFragment.setArguments(bundlesteps);
 
-            transaction.add(R.id.steps_container, stepsFragment);
+                transaction.add(R.id.steps_container, stepsFragment);
+            }
+
+            transaction.commit();
         }
-
-        transaction.commit();
     }
 
     @Override

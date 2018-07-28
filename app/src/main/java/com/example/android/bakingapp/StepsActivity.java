@@ -10,14 +10,15 @@ public class StepsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_steps);
         Bundle bundle = getIntent().getExtras();
+        if (savedInstanceState == null) {
+            StepsFragment stepsFragment = new StepsFragment();
+            stepsFragment.setArguments(bundle);
 
-        StepsFragment stepsFragment = new StepsFragment();
-        stepsFragment.setArguments(bundle);
-
-        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .add(R.id.steps_container, stepsFragment)
-                .commit();
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .add(R.id.steps_container, stepsFragment)
+                    .commit();
+        }
     }
 
     @Override
