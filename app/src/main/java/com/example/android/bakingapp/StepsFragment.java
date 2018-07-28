@@ -46,8 +46,11 @@ public class StepsFragment extends Fragment {
     private Button nextButton;
 
     private long playbackPosition;
+    private String PLAYBACK_POSITION;
     private int currentWindow;
+    private String CURRENT_WINDOW;
     private boolean playWhenReady = true;
+    private String PLAY_WHEN_READY;
     private Steps[] steps;
     private int numberSteps;
     private int currentStep;
@@ -61,9 +64,13 @@ public class StepsFragment extends Fragment {
         steps = getArguments().getParcelableArrayList("steps").toArray(new Steps[0]);
         numberSteps = getArguments().getInt("numberSteps");
         currentStep = getArguments().getInt("currentStep");
-
-
         videoURL = step.getVideoURL();
+
+        if (savedInstanceState != null) {
+            playbackPosition = savedInstanceState.getLong(PLAYBACK_POSITION);
+            currentWindow = savedInstanceState.getInt(CURRENT_WINDOW,0);
+            playWhenReady = savedInstanceState.getBoolean(PLAY_WHEN_READY);
+        }
 
 
         FragmentStepsBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_steps, container, false);
@@ -133,10 +140,10 @@ public class StepsFragment extends Fragment {
             if (player == null) {
                 player = ExoPlayerFactory.newSimpleInstance(new DefaultRenderersFactory(context),
                         new DefaultTrackSelector(), new DefaultLoadControl());
-                playerView.setPlayer(player);
-                player.setPlayWhenReady(playWhenReady);
-                player.seekTo(currentWindow, playbackPosition);
             }
+            playerView.setPlayer(player);
+            player.setPlayWhenReady(playWhenReady);
+            player.seekTo(currentWindow, playbackPosition);
             MediaSource mediaSource = buildMediaSource(Uri.parse(videoURL));
             player.prepare(mediaSource, true, false);
         }
@@ -160,6 +167,9 @@ public class StepsFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        outState.putLong(PLAYBACK_POSITION, playbackPosition);
+        outState.putInt(CURRENT_WINDOW, currentWindow);
+        outState.putBoolean(PLAY_WHEN_READY, playWhenReady);
     }
 
     @Override
