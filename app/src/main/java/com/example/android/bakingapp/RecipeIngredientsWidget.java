@@ -3,11 +3,13 @@ package com.example.android.bakingapp;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.ListView;
 import android.widget.RemoteViews;
 
 import com.example.android.bakingapp.data.Ingredients;
+import com.example.android.bakingapp.widget.WidgetService;
 import com.google.gson.Gson;
 
 /**
@@ -28,10 +30,15 @@ public class RecipeIngredientsWidget extends AppWidgetProvider {
 
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.recipe_ingredients_widget);
-        if(this.recipeName != null && this.ingredientslist != null){
+        if(this.recipeName != null){
             views.setTextViewText(R.id.appwidget_text, this.recipeName + "\nIngredents");
-            views.setTextViewText(R.id.ingredientslist, this.ingredients);
         }
+        Intent intent = new Intent(context, WidgetService.class);
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+
+        //setting adapter to listview of the widget
+        views.setRemoteAdapter(appWidgetId, R.id.listViewWidget,
+                intent);
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
@@ -41,10 +48,8 @@ public class RecipeIngredientsWidget extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         SharedPreferences preferences = context.getSharedPreferences(RECIPES,Context.MODE_PRIVATE);
         this.recipeName = preferences.getString(PREF_SELECTED_NAME, null);
-        this.ingredients = preferences.getString(PREF_INGREDIENTS, null);
 
-        Gson gson = new Gson();
-        this.ingredientslist = gson.fromJson(this.ingredients, Ingredients[].class);
+
         if(this.ingredientslist != null) {
             ingredientsListAsString();
         }

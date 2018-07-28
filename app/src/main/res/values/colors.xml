@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="cardBackground">#ebcafc</color>
     <color name="linecolor">#621b6c</color>
+    <color name="whitebackground">#ffffff</color>
 </resources>
