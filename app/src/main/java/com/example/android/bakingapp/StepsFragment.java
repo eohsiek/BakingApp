@@ -19,7 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.android.bakingapp.Data.Steps;
+import com.example.android.bakingapp.data.Steps;
 import com.example.android.bakingapp.databinding.FragmentStepsBinding;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;

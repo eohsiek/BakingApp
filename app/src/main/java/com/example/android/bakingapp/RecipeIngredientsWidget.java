@@ -4,11 +4,10 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.widget.ListView;
 import android.widget.RemoteViews;
 
-import com.example.android.bakingapp.Data.Ingredients;
+import com.example.android.bakingapp.data.Ingredients;
 import com.google.gson.Gson;
 
 /**

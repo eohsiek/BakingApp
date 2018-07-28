@@ -15,11 +15,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.android.bakingapp.Data.Ingredients;
-import com.example.android.bakingapp.Data.Recipe;
-import com.example.android.bakingapp.Data.RecipeAdapter;
-import com.example.android.bakingapp.Data.Steps;
-import com.example.android.bakingapp.Network.GetRecipeAsync;
+import com.example.android.bakingapp.data.Ingredients;
+import com.example.android.bakingapp.data.Recipe;
+import com.example.android.bakingapp.data.RecipeAdapter;
+import com.example.android.bakingapp.data.Steps;
+import com.example.android.bakingapp.network.GetRecipeAsync;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;

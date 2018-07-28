@@ -1,11 +1,10 @@
 package com.example.android.bakingapp;
 
-import android.os.Parcelable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.android.bakingapp.Data.Steps;
+import com.example.android.bakingapp.data.Steps;
 
 import java.util.ArrayList;
 import java.util.Arrays;

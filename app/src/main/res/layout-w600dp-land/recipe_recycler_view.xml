@@ -3,7 +3,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="recipe" type="com.example.android.bakingapp.Data.Recipe" />
+        <variable name="recipe" type="com.example.android.bakingapp.data.Recipe" />
     </data>
 
     <android.support.v7.widget.CardView

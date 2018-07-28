@@ -8,17 +8,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.example.android.bakingapp.Data.Ingredients;
-import com.example.android.bakingapp.Data.IngredientsAdapter;
-import com.example.android.bakingapp.Data.Recipe;
-import com.example.android.bakingapp.Data.Steps;
-import com.example.android.bakingapp.Data.StepsAdapter;
+import com.example.android.bakingapp.data.Ingredients;
+import com.example.android.bakingapp.data.IngredientsAdapter;
+import com.example.android.bakingapp.data.Recipe;
+import com.example.android.bakingapp.data.Steps;
+import com.example.android.bakingapp.data.StepsAdapter;
 import com.example.android.bakingapp.databinding.FragmentRecipeBinding;
 
 import java.util.ArrayList;

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <variable name="recipe" type="com.example.android.bakingapp.Data.Recipe" />
+        <variable name="recipe" type="com.example.android.bakingapp.data.Recipe" />
     </data>
 
 

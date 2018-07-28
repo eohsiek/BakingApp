@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="step" type="com.example.android.bakingapp.Data.Steps" />
+        <variable name="step" type="com.example.android.bakingapp.data.Steps" />
     </data>
 
 

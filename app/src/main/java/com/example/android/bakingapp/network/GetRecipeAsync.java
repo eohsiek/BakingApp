@@ -1,4 +1,4 @@
-package com.example.android.bakingapp.Network;
+package com.example.android.bakingapp.network;
 
 import android.os.AsyncTask;
 

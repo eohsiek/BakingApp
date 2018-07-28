@@ -1,4 +1,4 @@
-package com.example.android.bakingapp.Data;
+package com.example.android.bakingapp.data;
 
 
 import android.os.Parcel;
