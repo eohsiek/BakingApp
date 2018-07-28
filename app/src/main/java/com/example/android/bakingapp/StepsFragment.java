@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,7 +69,6 @@ public class StepsFragment extends Fragment {
             playbackPosition = savedInstanceState.getLong(PLAYBACK_POSITION);
             currentWindow = savedInstanceState.getInt(CURRENT_WINDOW,0);
             playWhenReady = savedInstanceState.getBoolean(PLAY_WHEN_READY);
-            Log.i("savedcurrentwindow", String.valueOf(playbackPosition));
         }
 
 
@@ -121,7 +119,6 @@ public class StepsFragment extends Fragment {
         playbackPosition = player.getCurrentPosition();
         currentWindow = player.getCurrentWindowIndex();
         playWhenReady = player.getPlayWhenReady();
-        Log.i("pausecurrentwindow", String.valueOf(playbackPosition));
         if (Util.SDK_INT <= 23) {
             releasePlayer();
         }
@@ -141,7 +138,6 @@ public class StepsFragment extends Fragment {
         }
         else {
             playerView.setVisibility(View.VISIBLE);
-            Log.i("videoURL", "this" + videoURL);
             if (player == null) {
                 player = ExoPlayerFactory.newSimpleInstance(new DefaultRenderersFactory(context),
                         new DefaultTrackSelector(), new DefaultLoadControl());
@@ -149,7 +145,6 @@ public class StepsFragment extends Fragment {
             playerView.setPlayer(player);
             player.seekTo(currentWindow, playbackPosition);
             player.setPlayWhenReady(playWhenReady);
-            Log.i("playcurrentwindow", String.valueOf(playbackPosition));
             MediaSource mediaSource = buildMediaSource(Uri.parse(videoURL));
             player.prepare(mediaSource, false, false);
         }
@@ -171,7 +166,6 @@ public class StepsFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        Log.i("savingcurrentwindow", String.valueOf(playbackPosition));
         outState.putLong(PLAYBACK_POSITION, playbackPosition);
         outState.putInt(CURRENT_WINDOW, currentWindow);
         outState.putBoolean(PLAY_WHEN_READY, playWhenReady);
