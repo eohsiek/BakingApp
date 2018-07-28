@@ -46,11 +46,11 @@ public class StepsFragment extends Fragment {
     private Button nextButton;
 
     private long playbackPosition;
-    private String PLAYBACK_POSITION;
+    private static String PLAYBACK_POSITION = "playbackpositiongextra";
     private int currentWindow;
-    private String CURRENT_WINDOW;
+    private static String CURRENT_WINDOW = "currentwindowextra";
     private boolean playWhenReady = true;
-    private String PLAY_WHEN_READY;
+    private static String PLAY_WHEN_READY = "playwhenreadyextra";
     private Steps[] steps;
     private int numberSteps;
     private int currentStep;
@@ -70,6 +70,7 @@ public class StepsFragment extends Fragment {
             playbackPosition = savedInstanceState.getLong(PLAYBACK_POSITION);
             currentWindow = savedInstanceState.getInt(CURRENT_WINDOW,0);
             playWhenReady = savedInstanceState.getBoolean(PLAY_WHEN_READY);
+            Log.i("savedcurrentwindow", String.valueOf(playbackPosition));
         }
 
 
@@ -117,6 +118,10 @@ public class StepsFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
+        playbackPosition = player.getCurrentPosition();
+        currentWindow = player.getCurrentWindowIndex();
+        playWhenReady = player.getPlayWhenReady();
+        Log.i("pausecurrentwindow", String.valueOf(playbackPosition));
         if (Util.SDK_INT <= 23) {
             releasePlayer();
         }
@@ -142,18 +147,17 @@ public class StepsFragment extends Fragment {
                         new DefaultTrackSelector(), new DefaultLoadControl());
             }
             playerView.setPlayer(player);
-            player.setPlayWhenReady(playWhenReady);
             player.seekTo(currentWindow, playbackPosition);
+            player.setPlayWhenReady(playWhenReady);
+            Log.i("playcurrentwindow", String.valueOf(playbackPosition));
             MediaSource mediaSource = buildMediaSource(Uri.parse(videoURL));
-            player.prepare(mediaSource, true, false);
+            player.prepare(mediaSource, false, false);
         }
     }
 
     private void releasePlayer() {
         if (player != null) {
-            playbackPosition = player.getCurrentPosition();
-            currentWindow = player.getCurrentWindowIndex();
-            playWhenReady = player.getPlayWhenReady();
+
             player.release();
             player = null;
         }
@@ -167,6 +171,7 @@ public class StepsFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        Log.i("savingcurrentwindow", String.valueOf(playbackPosition));
         outState.putLong(PLAYBACK_POSITION, playbackPosition);
         outState.putInt(CURRENT_WINDOW, currentWindow);
         outState.putBoolean(PLAY_WHEN_READY, playWhenReady);
